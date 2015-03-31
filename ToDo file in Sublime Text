@@ -1,0 +1,16 @@
+ToDo's
+
+
+
+
+
+investigar manualmente, tambien el archivo con si_no_directivas
+por parrafo o por frase, para que sean comparables
+investigar algo de weka, ver lo de atributos segun cada palabra
+
+ejemplo12, "As a rule, the equals method should be used by implementations of this class to decide if two keys are the same after doing something"
+ejemplo13, "this is something not important after all"
+
+id, should, must, call, before, after, directiva
+ejemplo12,1,0,0,0,1, 1
+ejemplo13,0,0,0,0,1,0
