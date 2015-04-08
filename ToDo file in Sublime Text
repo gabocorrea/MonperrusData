@@ -1,7 +1,30 @@
-ToDo's
+ToDo's:
 
 
 
+errores dataset:
+	linea 554:	tiene mal extraido el texto del comentario... está incompleto ...-> entonces -> dataset.xml no fue correctamente convertido a .csv
+	linea 11980 ? quizas tambien le pasa lo mismo.... porque tambien su primer valor era un comentario en las comas
+errores en directives.csv:
+	linea 2881 tiene un "  adentro del texto (el cual ya va con "" por fuera), causando conflicto con las , y ""
+
+
+
+nuevo metodo:
+	61 / 4253 directivas no_encontradas. Las 61 no aparecen en el dataset.
+	de las 61 hay lo siguiente:
+		java/awt/ 29
+		java/beans/ 6
+		java/nio/ 3
+		javax/rmi/ 2
+		javax/script/ 5
+		javax/activation/ 4
+		javax/swing/ 6
+		javax/management/ 4
+		javax/jws/ 2
+
+viejo metodo:
+	1420 / 4253 directivas no_encontradas
 
 
 investigar manualmente, tambien el archivo con si_no_directivas
@@ -11,6 +34,9 @@ investigar algo de weka, ver lo de atributos segun cada palabra
 ejemplo12, "As a rule, the equals method should be used by implementations of this class to decide if two keys are the same after doing something"
 ejemplo13, "this is something not important after all"
 
-id, should, must, call, before, after, directiva
+id, should, must, call, before, after, is_directive
 ejemplo12,1,0,0,0,1, 1
 ejemplo13,0,0,0,0,1,0
+
+
+bugs:
