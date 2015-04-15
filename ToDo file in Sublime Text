@@ -1,5 +1,11 @@
 ToDo's:
+	hacer todo por frases
+	cambiar hotkeys para que funcionen con las frases
 
+	\. +|\.(\\t)+|\.(\\n)+|@param|@return|<li>
+
+	directives_withID.csv puede ser arreglado. se deja el campo text al final, group_id antes del campo text... y se trabaja el archivo con .split en vez del modulo csv
+	ver que hace FileReader de html cuando se encuentra con un \n en el texto/archivo leido
 
 
 errores dataset:

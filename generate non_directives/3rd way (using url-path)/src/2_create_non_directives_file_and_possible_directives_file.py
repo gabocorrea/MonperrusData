@@ -9,13 +9,21 @@ patternsStr = r"\bcall\w*\b" + r"|" + r"\binvo\w*\b" + r"|" + r"\bbefore\b" + r"
 loops = 0 #put 0 for loop until end (infinite)
 myList = []
 
-import csv
 
-list_of_directives_id=[]
+
+
+
+list_of_directives_id_INT=[]
 with open("../out/directives_withID.csv") as fdDirectives:
-	csvDictReader = csv.DictReader(fdDirectives)
-	for row in csvDictReader:
-		list_of_directives_id.append(row["id"])
+	i = 1
+	for line in fdDirectives:
+		if i>1:
+			list_of_directives_id_INT.append( int(line.split(",",maxsplit=1)[0]) )
+		i+=1
+
+
+
+
 
 
 p = re.compile(patternsStr, re.IGNORECASE)
@@ -23,17 +31,25 @@ p = re.compile(patternsStr, re.IGNORECASE)
 
 fdout.write("id,type,path,text\n")
 fdout2.write("id,type,path,text\n")
-with open("../data/dataset_withID.csv") as fdDataset:
-	i = 0
+with open("../out/dataset_withID (xml2csv output).csv") as fdDataset:
+	i = 1
 	for line in fdDataset:
-		if i>0:
+
+
+		
+
+
+
+		if i>1:
 			if loops<1 and i%500==0:
 				print(i)
 			if loops>=1 and i>=loops:
 				break
 
-			if i not in list_of_directives_id: #!importante! esto asume (correctamente por ahora) que dataset_withID.csv tiene cada ID coincidiendo con el n# de linea
-				if p.search(line) == None:
+
+			line_splitted = line.split(",",maxsplit=3)
+			if int(line_splitted[0]) not in list_of_directives_id_INT:
+				if p.search(line_splitted[3]) == None:
 					fdout2.write(line)
 				else:
 					fdout.write(line)
