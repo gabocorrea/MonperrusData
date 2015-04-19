@@ -1,9 +1,12 @@
 import csv, re
 
-fdout = open("../out/dataset_withID_with_phrases.csv","w")
-fdout.write("id_phrase,type,path,text\n")
-
+################# This can be changed to try other results ############
 regex = r'\.\s+|\.(\\n)+|@param|@return|<li>'
+################# **************************************** ############
+
+fdout = open("../out/dataset_withID_with_phrases.csv","w")
+fdout.write("id,id_sub,is_directive,type,path,text\n")
+
 p = re.compile(regex,re.IGNORECASE)
 
 i=1
@@ -22,14 +25,14 @@ with open("../out/dataset_withID (xml2csv output).csv") as fdin_Dataset:
 			iterator = p.finditer(row_text)
 			j=1
 			nextStartPos=0
-			fdout.write(','.join([row_id+'-'+str(j-1),row_type,row_path,row_text]))
+			fdout.write(','.join([row_id,str(j-1),'?',row_type,row_path+'#'+str(j-1),row_text]))
 			
 			for m in iterator:
-				fdout.write(','.join([row_id+'-'+str(j),row_type,row_path+'#'+str(j),row_text[nextStartPos:m.start()]]) + "\n")
+				fdout.write(','.join([row_id,str(j),'?',row_type,row_path+'#'+str(j),row_text[nextStartPos:m.start()]]) + "\n")
 				nextStartPos = m.end()
 				j+=1
 				
-			fdout.write(','.join([row_id+'-'+str(j),row_type,row_path+'#'+str(j),row_text[nextStartPos:]]))
+			fdout.write(','.join([row_id,str(j),'?',row_type,row_path+'#'+str(j),row_text[nextStartPos:]]))
 			
 
 
