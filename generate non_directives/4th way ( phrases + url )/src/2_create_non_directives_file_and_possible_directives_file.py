@@ -34,7 +34,10 @@ with open("../out/dataset_withID_with_phrases.csv") as fdDataset:
 				break
 
 			line_splitted = line.split(",",maxsplit=5)
-			if int(line_splitted[0]) not in list_of_directives_id_INT:
+			if i>10000 and i%10==0:
+				pass
+				#print(i)
+			if int(line_splitted[0]) not in list_of_directives_id_INT:#no incluimos las lineas que contenian directivas detectadas por Monperrus.
 				if p.search(line_splitted[5]) == None:
 					fdout.write(','.join([line_splitted[0],line_splitted[1],'0',line_splitted[3],line_splitted[4],line_splitted[5]]))
 				else:

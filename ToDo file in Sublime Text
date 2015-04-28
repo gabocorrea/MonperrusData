@@ -1,47 +1,21 @@
 ToDo's:
+	problema: el primer <li> queda dentro de la frase anterior a ese 1er <li>
+	
 
-	en index.html, en updatecomment, ahi falta hacer arreglos: que el comentario sea mostrado y se haga highlight a las frases que probablemente son directivas.
-
-	en el script ????(no se cual)????_.... estoy modificando para que el archivo sea asi:
-
-	id,id_sub,directive,type,path,text
-	2,0,-1,package,org/eclipse/jface/dialogs,\nProvides support for dialogs.\n<h2>\nPackage Specification</h2>\nA dialog is a specialized window, typically consisting of a dialog area\nand a button bar, designed for narrow-focussed communication with the user.\n<p>The dialog framework consists of an abstract base class (<tt>Dialog</tt>),\nalong with more concrete dialog subclasses for displaying messages (<tt>MessageDialog</tt>),\nsoliciting text input (<tt>InputDialog</tt>), and displaying progress during\na long-running operation (<tt>ProgressMonitorDialog</tt>).\n<p>Dialog stores (<tt>IDialogStore</tt>, <tt>DialogStore</tt>) provide\na general framework for organizing a dialog's settings into key/value pairs.\nMulti-page dialogs are made easier through the use of dialog pages (<tt>IDialogPage</tt>,\n<tt>DialogPage</tt>).\n<p>Note: None of the classes in this package maintain global state.\n<br>&nbsp;\n<br>&nbsp;\n<br>&nbsp;\n
-	2,1,0, 1ra parte
-	2,2,0, segunda parte
-	2,3,1,package,org/eclipse/jface/dialogs#3,<p>The dialog framework consists of an abstract base class (<tt>Dialog</tt>),\nalong with more concrete dialog subclasses for displaying messages (<tt>MessageDialog</tt>),\nsoliciting text input (<tt>InputDialog</tt>), and displaying progress during\na long-running operation (<tt>ProgressMonitorDialog</tt>)
-	2,4,0
-	2,5,0
-	2,6,1,package,org/eclipse/jface/dialogs#6,<p>Note: None of the classes in this package maintain global state
-	3,0,0 ...
-
-	3,4,2 (un maybe directive para revisar para despues)
-
-	etc
+	(opcional)que los hotkeys no funcionen al estar escribiendo
 
 
 
+		Todos:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	agregar url a la pagina. al lado de id
-	cambiar hotkeys para que funcionen con las frases
-
-	\. +|\.(\\t)+|\.(\\n)+|@param|@return|<li>
-
+		- List items para mejor separar frases
+		- @tags (idem)
+		- [done]							text input para cambiar el ID
+		- [done]							color de la frase seleccionada mas visible
+		- saltar comments/frases vacias?
+	
+Possible Improvements:
 	directives_withID.csv puede ser arreglado. se deja el campo text al final, group_id antes del campo text... y se trabaja el archivo con .split en vez del modulo csv
-	ver que hace FileReader de html cuando se encuentra con un \n en el texto/archivo leido
 
 
 errores dataset:
@@ -49,7 +23,6 @@ errores dataset:
 	linea 11980 ? quizas tambien le pasa lo mismo.... porque tambien su primer valor era un comentario en las comas
 errores en directives.csv:
 	linea 2881 tiene un "  adentro del texto (el cual ya va con "" por fuera), causando conflicto con las , y ""
-
 
 
 nuevo metodo:
@@ -69,16 +42,4 @@ viejo metodo:
 	1420 / 4253 directivas no_encontradas
 
 
-investigar manualmente, tambien el archivo con si_no_directivas
-por parrafo o por frase, para que sean comparables
-investigar algo de weka, ver lo de atributos segun cada palabra
 
-ejemplo12, "As a rule, the equals method should be used by implementations of this class to decide if two keys are the same after doing something"
-ejemplo13, "this is something not important after all"
-
-id, should, must, call, before, after, is_directive
-ejemplo12,1,0,0,0,1, 1
-ejemplo13,0,0,0,0,1,0
-
-
-bugs:
