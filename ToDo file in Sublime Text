@@ -1,6 +1,27 @@
+diff web-output-1.csv web-output-2.csv --side-by-side [--suppress-common-lines]
+
+prox mail a romain:
+	Romain,
+
+	investigué una forma para que podamos comparar las diferencias entre tus resultados de comentarios y los mios de forma más rapida
+
+	también hice un script que usa los resultados y crea un archivo con todos los comentarios (un dataset.csv con todo) pero con nuestras correcciones.
+
+	Finalmente ese ultimo archivo, ya lo puedo convertir a .arff para Weka.
+
 ToDo's:
+	doing:
+		en el ultimo archivo de SText ( el de mas a la derecha ) tiene una separacion de frases. la ultima linea tiene un problema con los simbolos <br>&nbsp;\n
+
+	space from directive -> non_directive -> revise
+
+	el id==27 es problematico
 	problema: el primer <li> queda dentro de la frase anterior a ese 1er <li>
-	
+	problema: el ultimo <li> se une con el sgte parrafo dpes de la lista
+	hacer lo mismo que <li> para los tags <dl>  dt   .. dd 1<dd> </dd>   </dl>   (a description list)
+	deberia pescar los <li> siempre... no darle preferencia a los </li>
+	pegar <ul> con <li>   y </li> con </ul> en la regex
+
 
 	(opcional)que los hotkeys no funcionen al estar escribiendo
 
@@ -42,4 +63,9 @@ viejo metodo:
 	1420 / 4253 directivas no_encontradas
 
 
+
+notas del 1er archivo analizado:
+	id 207 - 'backwards compatibility'
+	id 232 - 'static' y 'prevent' no son keywords.. raro quizas que no lo sean
+	*blocking* podria ser keyword?  es parecido a lock*
 
