@@ -2,20 +2,13 @@ import re
 import csv
 
 #########	Modify these variables     ###########
-fileIn_name = "dataset_withID_with_non_directives.csv"
-sparce = False
+fileIn_name = "directives_withID.csv" #must be a .csv
+is_directive = 1 #put 0 for a file without directives. 1 for a file with only directives
+num_of_columns = 5 #1st column should be id. last column should be comment_text
+
+sparce = True
 ##################################################
 
-
-
-if "non_directives" in fileIn_name:
-	is_directive = 0
-elif "directives" in fileIn_name:
-	is_directive = 1
-else:
-	import sys
-	print("MyError: file_name var in line 4 of this script must be a string containing either 'non_directives' or 'directives' in it's name!")
-	sys.exit()
 
 patterns = [r"\bcall\w*\b" ,
  r"\binvo\w*\b" ,
@@ -74,12 +67,11 @@ class Debug:
 		self.NotUsed = True	
 	def log(self, text):
 		mode = "w" if self.NotUsed else "a"
-		with open("../out/log.txt",mode) as fdlog:
+		with open("log.txt",mode) as fdlog:
 			fdlog.write(str(text))
 		if self.NotUsed: self.NotUsed=False
 debug = Debug()
 
-loops = 0 #put 0 for loop until end (infinite)
 
 
 def getPatternCountList( text , regexList):
@@ -109,13 +101,14 @@ def getPatternCountListSparse( text, regexList):
 		i+=1
 	return L
 
-
-i=0
-with open("../out/"+fileIn_name[:-3]+"arff","w") as fdout:
+sparce_str_file_name = ''
+if sparce:
+	sparce_str_file_name = '_(sparce)'
+with open(fileIn_name[:-4]+sparce_str_file_name+".arff","w") as fdout:
 	fdout.write("% 1. Title: Directive Keywords present in file "+ fileIn_name +"\n\n")
 	fdout.write("@RELATION directive_keywords\n\n")
 
-	fdout.write("@ATTRIBUTE id NUMERIC")
+	fdout.write("@ATTRIBUTE id NUMERIC\n")
 	for elem in patterns:
 		inicio = elem.find("b")+1
 		fin = elem.find("\\", inicio)
@@ -124,20 +117,29 @@ with open("../out/"+fileIn_name[:-3]+"arff","w") as fdout:
 	fdout.write("@ATTRIBUTE is_directive NUMERIC\n")
 	fdout.write("\n@DATA\n")
 
-	with open("../out/"+fileIn_name) as fdin:
+	
+	with open(fileIn_name) as fdin:
 		csvDictReader = csv.DictReader(fdin)
-		for row in csvDictReader:
 
-			if loops<1 and i%500==0:
-				print(i+" lines scanned")
-			if loops>=1 and i>=loops:
-				break
+		i=0
+		for line in fdin:
+			if i==0:
+				i+=1
+				continue#skip 1st line
+
+			if i%5000==0:
+				print(str(i)+" lines scanned")
 			
-			debug.log(str(type(row["text"]))+"\n")
+			row = line.split(',', num_of_columns-1)
 
-			if not sparce:
-				fdout.write(row["id"]+"," + ",".join(str(num) for num in getPatternCountList(str(row["text"]), patterns)) +","  +str(is_directive)+  "\n")
+			p = re.compile(r'\d+')
+			if p.search(row[0]) == None:
+				debug.log('wrong id format in line '+str(i+1)+'\n')
 			else:
-				fdout.write("{0 "+row["id"]+","  +  ",".join(words for words in getPatternCountListSparse(str(row["text"])))  +str(len(patterns)+2-1)+" "+str(is_directive)  "}\n")
+				if not sparce:
+					fdout.write(row[0]+"," + ",".join(str(num) for num in getPatternCountList(str(row[num_of_columns-1]), patterns)) +","  +str(is_directive)+  "\n")
+				else:
+					fdout.write("{0 "+row[0]+","  +  ",".join(words for words in getPatternCountListSparse(str(row[num_of_columns-1]), patterns))  +str(len(patterns)+2-1)+" "+str(is_directive) + "}\n")
 
 
+			i+=1

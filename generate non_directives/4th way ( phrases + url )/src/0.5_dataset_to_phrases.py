@@ -4,10 +4,10 @@ import csv, re
 
 
 ################# This can be changed to try other results ############
-#regex = r'\.\s+|\.(\\n)+|@param|@return|@deprecated|@exception|@throws|@see|@version|@since|@link|</li>\s*(\\n)*\s*' #|\s*(\\n)*\s*<li>' #TODO: algunas se cortal al ppio, otras al final
+#regex = r'\.\s+|\.(\\n)+|@param|@return|@deprecated|@exception|@throws|@see|@version|@since|</li>\s*(\\n)*\s*' #|\s*(\\n)*\s*<li>' #TODO: algunas se cortal al ppio, otras al final
 ################# **************************************** ############
 regexEnd = r'\.\s*(&nbsp;)*(<br>)*\s*(&nbsp;)*(\\n)+\s*(&nbsp;)*(<br>)*\s*(&nbsp;)*(\\n)*|\.\s+|</ul>\s*(\\n)*\s*|</ol>\s*(\\n)*\s*|</dl>\s*(\\n)*\s*'
-regexBeg = r'@param|@return|@deprecated|@exception|@throws|@see|@version|@since|@link|@author|<li>|<dd>'
+regexBeg = r'@param|@return|@deprecated|@exception|@throws|@see|@version|@since|@author|<li>|<dd>'
 ################# 
 
 fdout = open("../out/dataset_withID_with_phrases.csv","w")
